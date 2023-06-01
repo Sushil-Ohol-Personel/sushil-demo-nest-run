@@ -1,4 +1,4 @@
-name: nextjs-cloud-run
+name: nextjs-cloud-run-app
 
 on:
   push:
