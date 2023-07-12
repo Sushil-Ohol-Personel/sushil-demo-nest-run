@@ -29,7 +29,7 @@ steps:
   
 - name: 'gcr.io/cloud-builders/npm'
   id: sonarpush
-  args: ['run','sonar']  
+  args: ['run','sonar:sonar']  
 
 - name: 'gcr.io/cloud-builders/docker'
   id: building_image_using_docker
