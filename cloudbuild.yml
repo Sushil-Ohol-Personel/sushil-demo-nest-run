@@ -1,0 +1,16 @@
+steps:
+  - name: 'gcr.io/cloud-builders/npm'
+    id: Installing NPM
+    args: ['install']
+
+  - name: 'gcr.io/cloud-builders/npm'
+    id: CLEAN
+    args: ['run', 'cache']
+
+  - name: 'gcr.io/cloud-builders/npm'
+    id: BUILDING WITH NPM
+    args: ['run', 'build']
+
+  - name:  'gcr.io/cloud-builders/npm'
+    id: UNIT TESTING
+    args: ['install', '-g', 'karma-cli', 'run', 'test']
