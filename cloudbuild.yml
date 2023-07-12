@@ -10,7 +10,14 @@ steps:
   - name:  'gcr.io/cloud-builders/npm'
     id: UNIT TESTING
     args: ['install', '-g', 'karma-cli', 'run', 'test']
+
+  - name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'
+    id: Sonarqube Integration - code quality inspection
+    args:
+      - '-Dsonar.host.url=https://sonarcloud.io'
+      - '-Dsonar.login=$_SONAR_LOGIN'
+      - '-Dsonar.projectKey=$_SONAR_PROJECT'
+      - '-Dsonar.organization=$_SONAR_ORG'
+      - '-Dsonar.sources=.'  
     
-  - name: 'gcr.io/cloud-builders/npm'
-    entrypoint: npm
-    args: ['-Dsonar.host.url=https://sonarcloud.io','-Dsonar.organization=sushil-demo-nest-run','-Dsonar.projectKey=sushil-demo-nest-run-project','-Dsonar.login=${_SONAR_TOKEN}']
+  
