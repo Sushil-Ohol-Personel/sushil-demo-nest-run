@@ -21,7 +21,7 @@ steps:
  # args: ['install','-g','karma-cli','run','test','--','code-coverage','no-watch','no-progress','browsers=ChromeHeadlessNoSandbox']
 - name: 'gcr.io/cloud-builders/npm'
   id: install sonar-scanner 
-  args: ['install','sonarqube-scanner', 'sonar-scanner', '-Dsonar.organization', 'sushil-test-organization', '-Dsonar.projectKey', 'sushil-test-project', '-Dsonar.host.url', 'https://sonarcloud.io', '-Dsonar.sources', '.']
+  args: ['install', 'sonarqube-scanner', 'sonar-scanner', '-Dsonar.organization', 'sushil-test-organization', '-Dsonar.projectKey', 'sushil-test-project', '-Dsonar.host.url', 'https://sonarcloud.io']
   
 - name: 'gcr.io/cloud-builders/npm'
   id: install typescript 
