@@ -21,23 +21,16 @@ steps:
  # args: ['install','-g','karma-cli','run','test','--','code-coverage','no-watch','no-progress','browsers=ChromeHeadlessNoSandbox']
 - name: 'gcr.io/cloud-builders/npm'
   id: install sonar-scanner 
-  args: ['install','sonarqube-scanner']
+  args: ['install','sonarqube-scanner', 'sonar-scanner', '-Dsonar.organization', 'sushil-test-organization', '-Dsonar.projectKey', 'sushil-test-project', '-Dsonar.host.url', 'https://sonarcloud.io', '-Dsonar.sources', '.']
   
 - name: 'gcr.io/cloud-builders/npm'
   id: install typescript 
   args: ['install','-D','typescript@latest']
   
-- name: 'gcr.io/cloud-builders/sonar-scanner:latest'
-  args:
-    - '-Dsonar.host.url=https://sonarcloud.io'
-    - '-Dsonar.login=${_SONAR_TOKEN}'
-    - '-Dsonar.projectKey=sushil-test-project'
-    - '-Dsonar.organization=sushil-test-organization'
-    - '-Dsonar.sources=.'
-
 - name: 'gcr.io/cloud-builders/docker'
   id: building_image_using_docker
   args: ["build", "-t", "gcr.io/$PROJECT_ID/nodej:$COMMIT_SHA", "-t", "gcr.io/$PROJECT_ID/nodej:latest", "."]
+
 - name: 'gcr.io/cloud-builders/docker'
   id: pushing_image_gcr
   args: ["push", "gcr.io/$PROJECT_ID/nodej:$COMMIT_SHA"]
