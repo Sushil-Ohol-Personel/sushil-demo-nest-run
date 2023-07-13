@@ -27,15 +27,15 @@ steps:
   id: install typescript 
   args: ['install','-D','typescript@latest']
   
-- name: 'gcr.io/cloud-builders-community/sonar-scanner:latest'
+- name: 'gcr.io/cloud-builders/sonar-scanner:latest'
   args:
     - '-Dsonar.host.url=https://sonarcloud.io'
-    - '-Dsonar.login=${_SONAR_LOGIN}'
-    - '-Dsonar.projectKey=${_SONAR_PROJECT_KEY}'
-    - '-Dsonar.organization=${_SONAR_ORGANIZATION}'
+    - '-Dsonar.login=${_SONAR_TOKEN}'
+    - '-Dsonar.projectKey=sushil-test-project'
+    - '-Dsonar.organization=sushil-test-organization'
     - '-Dsonar.sources=.'
 
-- name: 'gcr.io/cloud-builders/docker'
+  - name: 'gcr.io/cloud-builders/docker'
   id: building_image_using_docker
   args: ["build", "-t", "gcr.io/$PROJECT_ID/nodej:$COMMIT_SHA", "-t", "gcr.io/$PROJECT_ID/nodej:latest", "."]
 - name: 'gcr.io/cloud-builders/docker'
