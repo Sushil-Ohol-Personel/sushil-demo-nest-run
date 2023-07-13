@@ -27,7 +27,7 @@ steps:
   id: install typescript 
   args: ['install','-D','typescript@latest']
   
-- name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'
+- name: 'gcr.io/cloud-builders-community/sonar-scanner:latest'
   args:
     - '-Dsonar.host.url=https://sonarcloud.io'
     - '-Dsonar.login=${_SONAR_LOGIN}'
