@@ -27,12 +27,13 @@ steps:
   id: install typescript 
   args: ['install','-D','typescript@latest']
   
-  # Run SonarCloud analysis
-- name: 'gcr.io/sonarcloud/sonarcloud-scan'
-  env:
-    - 'SONAR_TOKEN=${_SONAR_TOKEN}'
-    - 'SONAR_PROJECT_KEY=${_SONAR_PROJECT_KEY}'
-    - 'SONAR_ORGANIZATION=${_SONAR_ORGANIZATION}'  
+- name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'
+  args:
+    - '-Dsonar.host.url=https://sonarcloud.io'
+    - '-Dsonar.login=${_SONAR_LOGIN}'
+    - '-Dsonar.projectKey=${_SONAR_PROJECT_KEY}'
+    - '-Dsonar.organization=${_SONAR_ORGANIZATION}'
+    - '-Dsonar.sources=.'
 
 - name: 'gcr.io/cloud-builders/docker'
   id: building_image_using_docker
